@@ -24,7 +24,7 @@ module.exports = {
 
 ## Configuration
 ### vueExcludeBlocks
-An array of block names that Prettier will skip while formatting Vue SFC files.
+Allows you to specify a list of blocks `strings` to ignore while formatting Vue SFC files.
 
 | Default     | CLI Override                    | API Override                 |
 |-------------|---------------------------------|------------------------------|
