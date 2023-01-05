@@ -1,6 +1,6 @@
 {
   "name": "prettier-plugin-vue",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A Prettier plugin that provides additional options for Vue files formatting.",
   "main": "plugin.js",
   "keywords": [
