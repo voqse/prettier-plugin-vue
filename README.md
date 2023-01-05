@@ -24,7 +24,8 @@ module.exports = {
 
 ## Configuration
 ### vueExcludeBlocks
-An array of block names that prettier will skip while formatting.
+An array of block names that Prettier will skip while formatting Vue SFC files.
+> By default, this plugin ignores `<style>` blocks to avoid interfering with other linters.
 
 | Default     | CLI Override                    | API Override                 |
 |-------------|---------------------------------|------------------------------|
