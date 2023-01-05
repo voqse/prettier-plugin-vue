@@ -13,7 +13,7 @@ npm install prettier prettier-plugin-vue --save-dev
 
 This plugin follows Prettier’s autoloading convention, so as long as you’ve got Prettier set up in your project, it’ll start working automatically as soon as it’s installed.
 
-Note that plugin autoloading is not supported when using certain package managers, such as pnpm or Yarn PnP. In this case you may need to add the plugin to your Prettier config explicitly:
+*Note that plugin autoloading is not supported when using certain package managers, such as pnpm or Yarn PnP. In this case you may need to add the plugin to your Prettier config explicitly:*
 
 ```javascript
 // prettier.config.js
@@ -25,11 +25,12 @@ module.exports = {
 ## Configuration
 ### vueExcludeBlocks
 An array of block names that Prettier will skip while formatting Vue SFC files.
-> By default, this plugin ignores `<style>` blocks to avoid interfering with other linters.
 
 | Default     | CLI Override                    | API Override                 |
 |-------------|---------------------------------|------------------------------|
 | `['style']` | `--vue-exclude-blocks <string>` | `vueExcludeBlocks: <string>` |
+
+*Note that by default this plugin ignores `<style>` blocks to avoid interfering with other linters.*
 
 ### Example `.prettierrc`
 ```javascript
