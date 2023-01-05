@@ -14,11 +14,10 @@ const pluginOptions = {
 
 function extendPrinter(defaultPrint) {
   return (path, options, print) => {
-    const { vueExcludeBlocks } = options
+    const { vueExcludeBlocks, originalText } = options
     const { name, parent, sourceSpan } = path.getValue()
 
     if (parent && parent.type === 'root' && vueExcludeBlocks.includes(name)) {
-      const { originalText } = options
       const { start, end } = sourceSpan
       return originalText.slice(start.offset, end.offset)
     }
