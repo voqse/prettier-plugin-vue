@@ -3,7 +3,7 @@
 [![CI](https://img.shields.io/github/actions/workflow/status/voqse/prettier-plugin-vue/deploy.yml?branch=master)](https://github.com/voqse/prettier-plugin-vue/actions/workflows/ci.yml)
 [![npm](https://img.shields.io/npm/v/prettier-plugin-vue)](https://www.npmjs.com/package/prettier-plugin-vue)
 
-A [Prettier](https://prettier.io/) plugin that provides additional options for Vue files formatting.
+A [Prettier](https://prettier.io/) plugin that extends default Vue files formatting with additional options.
 
 ## Installation
 To get started, just install prettier-plugin-vue as a dev-dependency:
