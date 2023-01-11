@@ -2,13 +2,15 @@ const { vue: vueParser } = require('prettier/parser-html').parsers
 
 const excludeDefaults = ['style']
 
+let defaultHtmlPrinter
+
 const pluginOptions = {
   vueExcludeBlocks: {
     type: 'string',
     category: 'Vue',
     array: true,
     default: [{ value: excludeDefaults }],
-    description: 'Exclude this blocks of Vue files from formatting.',
+    description: 'Ignore this blocks while formatting Vue SFC files.',
   },
 }
 
@@ -27,12 +29,12 @@ function extendPrinter(defaultPrint) {
 }
 
 function preprocessor(text, options) {
-  const {
-    printers: { html: htmlPrinter },
-  } = options.plugins.find(({ printers }) => printers.html)
+  if (!defaultHtmlPrinter) {
+    defaultHtmlPrinter = options.plugins.find(({ printers }) => printers.html).printers.html
 
-  if (htmlPrinter) {
-    htmlPrinter.print = extendPrinter(htmlPrinter.print)
+    if (defaultHtmlPrinter) {
+      defaultHtmlPrinter.print = extendPrinter(defaultHtmlPrinter.print)
+    }
   }
 
   return text
