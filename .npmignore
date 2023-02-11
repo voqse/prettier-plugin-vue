@@ -3,4 +3,6 @@
 .prettierrc
 .eslintrc.json
 plugin.test.js
-.exlintignore
+.eslintignore
+fixtures
+
