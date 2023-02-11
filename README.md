@@ -3,7 +3,7 @@
 [![CI](https://img.shields.io/github/actions/workflow/status/voqse/prettier-plugin-vue/deploy.yml?branch=master)](https://github.com/voqse/prettier-plugin-vue/actions/workflows/ci.yml)
 [![npm](https://img.shields.io/npm/v/prettier-plugin-vue)](https://www.npmjs.com/package/prettier-plugin-vue)
 
-A plugin that allows [Prettier](https://prettier.io/) to ignore certain blocks of Vue Single File Components (SFCs) independently of the IDE and its plugins. This can be useful if you want to setup Prettier in combination with other linters such as `eslint` and `stylelint`.
+A lightweight plugin that allows [Prettier](https://prettier.io/) to ignore certain blocks of Vue Single File Components (SFCs) independently of the IDE and its plugins. This can be useful if you want to setup Prettier in combination with other linters such as `eslint` or `stylelint`.
 
 ## Installation
 To get started, just install prettier-plugin-vue as a dev-dependency:
@@ -30,7 +30,7 @@ Allows you to specify a list of blocks `strings` to ignore while formatting Vue 
 |-------------|---------------------------------|------------------------------|
 | `['style']` | `--vue-exclude-blocks <string>` | `vueExcludeBlocks: <string>` |
 
-*Note that by default this plugin ignores `<style>` blocks to avoid interfering with other linters.*
+*Note that by default this plugin ignores `<style>` blocks to avoid interfering with stylelint.*
 
 ### Example `.prettierrc`
 ```javascript
