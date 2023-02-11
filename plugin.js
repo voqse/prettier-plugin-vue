@@ -1,6 +1,7 @@
 const { vue: vueParser } = require('prettier/parser-html').parsers
 
 const excludeDefaults = ['style']
+const excludeNodeType = 'vue-exclude-content'
 
 let defaultHtmlPrinter
 
@@ -14,21 +15,33 @@ const pluginOptions = {
   },
 }
 
+function printOriginal(node, options) {
+  const { originalText } = options
+  const { sourceSpan } = node
+
+  return originalText.slice(sourceSpan.start.offset, sourceSpan.end.offset).trim()
+}
+
 function extendPrinter(defaultPrint) {
   return (path, options, print) => {
-    const { vueExcludeBlocks, originalText } = options
-    const { name, parent, sourceSpan } = path.getValue()
+    const { vueExcludeBlocks } = options
+    const node = path.getValue()
 
-    if (parent && parent.type === 'root' && vueExcludeBlocks.includes(name)) {
-      const { start, end } = sourceSpan
-      return originalText.slice(start.offset, end.offset)
+    if (node.parent && node.parent.type === 'root' && vueExcludeBlocks.includes(node.name)) {
+      node.children.forEach((child) => {
+        Object.assign(child, { type: excludeNodeType })
+      })
+    }
+
+    if (node.type === excludeNodeType) {
+      return printOriginal(node, options)
     }
 
     return defaultPrint(path, options, print)
   }
 }
 
-function preprocessor(text, options) {
+function preprocess(text, options) {
   if (!defaultHtmlPrinter) {
     defaultHtmlPrinter = options.plugins.find(({ printers }) => printers.html).printers.html
 
@@ -42,10 +55,7 @@ function preprocessor(text, options) {
 
 module.exports = {
   parsers: {
-    vue: {
-      ...vueParser,
-      preprocess: preprocessor,
-    },
+    vue: Object.assign(vueParser, { preprocess }),
   },
   options: pluginOptions,
 }
