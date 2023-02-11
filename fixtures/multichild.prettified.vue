@@ -10,6 +10,8 @@ defineEmits(['click', 'submit', 'reset'])
 
 <template>
   <label for="button" :class="$style.label">Fancy Button</label>
+
+
   <button :type="type" id="button" :class="$style.button" @click="$emit('click', $event)" @submit="$emit('submit', $event)" @reset="$emit('reset', $event)">
     <slot />
   </button>

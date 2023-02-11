@@ -1,7 +1,7 @@
 const { vue: vueParser } = require('prettier/parser-html').parsers
 
 const excludeDefaults = ['style']
-const excludeNodeType = 'vue-exclude-content'
+const excludeNodeType = 'vue-excluded-content'
 
 let defaultHtmlPrinter
 
@@ -19,7 +19,7 @@ function printOriginal(node, options) {
   const { originalText } = options
   const { sourceSpan } = node
 
-  return originalText.slice(sourceSpan.start.offset, sourceSpan.end.offset).trim()
+  return originalText.slice(sourceSpan.start.offset, sourceSpan.end.offset)
 }
 
 function extendPrinter(defaultPrint) {
@@ -28,13 +28,19 @@ function extendPrinter(defaultPrint) {
     const node = path.getValue()
 
     if (node.parent && node.parent.type === 'root' && vueExcludeBlocks.includes(node.name)) {
-      node.children.forEach((child) => {
-        Object.assign(child, { type: excludeNodeType })
-      })
+      const { start } = node.children[0].sourceSpan
+      const { end } = node.children[node.children.length - 1].sourceSpan
+
+      node.children = [
+        {
+          sourceSpan: { start, end },
+          type: excludeNodeType,
+        },
+      ]
     }
 
     if (node.type === excludeNodeType) {
-      return printOriginal(node, options)
+      return printOriginal(node, options).trim()
     }
 
     return defaultPrint(path, options, print)
