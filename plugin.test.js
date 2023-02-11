@@ -11,9 +11,9 @@ for (const sourceFileName of files) {
     continue
   }
 
-  test('formats', async () => {
+  test(`Formats ${sourceFileName}`, async () => {
     const formattedFileName = sourceFileName.replace(/(\.[a-z]+)$/, '.prettified$1')
-    const sourceFilePath = path.resolve(fixturesDir, formattedFileName)
+    const sourceFilePath = path.resolve(fixturesDir, sourceFileName)
     const formattedFilePath = path.resolve(fixturesDir, formattedFileName)
 
     const sourceText = fs.readFileSync(sourceFilePath, 'utf8')
