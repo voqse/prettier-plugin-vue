@@ -1,6 +1,6 @@
 # prettier-plugin-vue
 
-[![CI](https://img.shields.io/github/actions/workflow/status/voqse/prettier-plugin-vue/deploy.yml?branch=master)](https://github.com/voqse/prettier-plugin-vue/actions/workflows/ci.yml)
+[![test](https://img.shields.io/github/actions/workflow/status/voqse/prettier-plugin-vue/test.yml?branch=master&label=test)](https://github.com/voqse/prettier-plugin-vue/actions/workflows/test.yml)
 [![npm](https://img.shields.io/npm/v/prettier-plugin-vue)](https://www.npmjs.com/package/prettier-plugin-vue)
 
 A lightweight plugin that allows [Prettier](https://prettier.io/) to ignore certain blocks of Vue Single File Components (SFCs) independently of the IDE and its plugins. This can be useful if you want to setup Prettier in combination with other linters such as `eslint` or `stylelint`.
