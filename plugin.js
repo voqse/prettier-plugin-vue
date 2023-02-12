@@ -17,9 +17,25 @@ const pluginOptions = {
 
 function printOriginal(node, options) {
   const { originalText } = options
-  const { sourceSpan } = node
+  const { start, end } = node.sourceSpan
 
-  return originalText.slice(sourceSpan.start.offset, sourceSpan.end.offset)
+  return originalText.slice(start.offset, end.offset)
+}
+
+function collapseChildren({ children }) {
+  if (!children.length) {
+    return children
+  }
+
+  const { start } = children[0].sourceSpan
+  const { end } = children[children.length - 1].sourceSpan
+
+  return [
+    {
+      sourceSpan: { start, end },
+      type: excludeNodeType,
+    },
+  ]
 }
 
 function extendPrinter(defaultPrint) {
@@ -28,15 +44,7 @@ function extendPrinter(defaultPrint) {
     const node = path.getValue()
 
     if (node.parent && node.parent.type === 'root' && vueExcludeBlocks.includes(node.name)) {
-      const { start } = node.children[0].sourceSpan
-      const { end } = node.children[node.children.length - 1].sourceSpan
-
-      node.children = [
-        {
-          sourceSpan: { start, end },
-          type: excludeNodeType,
-        },
-      ]
+      node.children = collapseChildren(node)
     }
 
     if (node.type === excludeNodeType) {
